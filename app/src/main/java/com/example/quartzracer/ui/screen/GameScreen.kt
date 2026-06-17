@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.quartzracer.GameViewModel
+import com.example.quartzracer.viewmodel.GameViewModel
 import com.example.quartzracer.ui.components.SpeedometerGauge
 
 @Composable
@@ -18,7 +18,6 @@ fun GameScreen(viewModel: GameViewModel, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // HUD kijelzők
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -27,10 +26,8 @@ fun GameScreen(viewModel: GameViewModel, modifier: Modifier = Modifier) {
             Text(text = "JACKPOT: ${viewModel.jackpotMultiplier}x", style = MaterialTheme.typography.headlineMedium)
         }
 
-        // Sebességmérő óra
         SpeedometerGauge(speed = viewModel.speed)
 
-        // Game Over állapot tiszta kezelése
         if (viewModel.isGameOver) {
             Surface(
                 modifier = Modifier.padding(16.dp),
@@ -49,22 +46,14 @@ fun GameScreen(viewModel: GameViewModel, modifier: Modifier = Modifier) {
             }
         }
 
-        // Irányító gombok az alján
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Button(
-                onClick = { viewModel.activateBoost() },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-            ) {
+            Button(onClick = { viewModel.activateBoost() }) {
                 Text(text = "BOOST")
             }
-
-            Button(
-                onClick = { viewModel.applyBrake() },
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
-            ) {
+            Button(onClick = { viewModel.applyBrake() }) {
                 Text(text = "BRAKE")
             }
         }
