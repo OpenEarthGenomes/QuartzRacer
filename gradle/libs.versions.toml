@@ -9,7 +9,7 @@ composeBom = "2024.02.00"
 coroutines = "1.8.0"
 
 [libraries]
-# Itt jönnek a tényleges könyvtárak
+# Itt jönnek a tényleges könyvtárak (A [libs] helyett ennek kell itt állnia!)
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
@@ -29,4 +29,3 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 # Az Android és Kotlin pluginok hivatkozásai
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
