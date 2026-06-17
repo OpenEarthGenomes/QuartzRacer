@@ -6,7 +6,6 @@ import android.media.SoundPool
 import com.example.quartzracer.R
 
 class QuartzAudioManager(context: Context) {
-
     private val soundPool: SoundPool
     private val soundMap = mutableMapOf<String, Int>()
 
@@ -17,36 +16,41 @@ class QuartzAudioManager(context: Context) {
             .build()
 
         soundPool = SoundPool.Builder()
-            .setMaxStreams(5)
+            .setMaxStreams(4)
             .setAudioAttributes(attributes)
             .build()
 
-        // Itt töltjük be a res/raw mappában lévő hangfájlokat
-        // Cseréld ki a fájlneveket a sajátjaidra!
         soundMap["boost"] = soundPool.load(context, R.raw.sfx_boost, 1)
         soundMap["brake"] = soundPool.load(context, R.raw.sfx_brake, 1)
-        soundMap["collision"] = soundPool.load(context, R.raw.sfx_collision, 1)
-        soundMap["jackpot"] = soundPool.load(context, R.raw.sfx_jackpot, 1)
+        soundMap["hit"] = soundPool.load(context, R.raw.sfx_collision, 1)
+        soundMap["collect"] = soundPool.load(context, R.raw.sfx_jackpot, 1)
     }
 
     fun playBoost() {
-        soundMap["boost"]?.let { soundPool.play(it, 1f, 1f, 0, 0, 1f) }
+        soundMap["boost"]?.let { 
+            soundPool.play(it, 1.0f, 1.0f, 0, 0, 1.0f) 
+        }
     }
 
     fun playBrake() {
-        soundMap["brake"]?.let { soundPool.play(it, 0.8f, 0.8f, 0, 0, 1f) }
+        soundMap["brake"]?.let { 
+            soundPool.play(it, 0.7f, 0.7f, 0, 0, 1.0f) 
+        }
     }
 
     fun playCollision() {
-        soundMap["collision"]?.let { soundPool.play(it, 1f, 1f, 0, 0, 1f) }
+        soundMap["hit"]?.let { 
+            soundPool.play(it, 1.0f, 1.0f, 1, 0, 1.0f) 
+        }
     }
 
-    fun playJackpot() {
-        soundMap["jackpot"]?.let { soundPool.play(it, 1f, 1f, 0, 0, 1f) }
+    fun playCollect() {
+        soundMap["collect"]?.let { 
+            soundPool.play(it, 0.9f, 0.9f, 0, 0, 1.0f) 
+        }
     }
 
     fun release() {
         soundPool.release()
     }
 }
-
