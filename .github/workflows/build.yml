@@ -14,19 +14,15 @@ jobs:
     - name: Forráskód letöltése a repóból
       uses: actions/checkout@v4
 
-    - name: Java 17 környezet beállítása
+    - name: Java 17 környezet beállítása és gyorsítótárazás
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: '17'
+        cache: 'gradle' # Mivel megírtuk a gradlew-et, a gyorsítótár most már tökéletesen működik és felgyorsítja a buildet!
 
-    - name: Gradle Wrapper ellenőrzése és automatikus generálása ha hiányzik
-      run: |
-        if [ ! -f gradlew ]; then
-          echo "A gradlew fájl nem található! A GitHub most automatikusan létrehozza..."
-          gradle wrapper
-        fi
-        chmod +x gradlew
+    - name: Gradle futtatási jog megadása
+      run: chmod +x gradlew
 
     - name: Automatikus APK lefordítása a TOML katalógus alapján
       run: ./gradlew assembleDebug
@@ -36,4 +32,3 @@ jobs:
       with:
         name: QuartzRacer-Debug-APK
         path: app/build/outputs/apk/debug/app-debug.apk
-
