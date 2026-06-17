@@ -35,6 +35,14 @@ class QuartzAudioManager(private val context: Context) {
         }
     }
 
+    fun playCollect() {
+        soundPool?.play(casinoJackpotId, 1.0f, 1.0f, 4, 0, 1.0f)
+    }
+    
+    fun playCasinoJackpot() {
+        soundPool?.play(casinoJackpotId, 1.0f, 1.0f, 4, 0, 1.0f)
+    }
+
     fun playBeepLow(rate: Float = 1.0f) {
         soundPool?.play(beepLowId, 1.0f, 1.0f, 1, 0, rate)
     }
@@ -55,13 +63,8 @@ class QuartzAudioManager(private val context: Context) {
         soundPool?.play(collisionId, 1.0f, 1.0f, 3, 0, 1.0f)
     }
 
-    fun playCasinoJackpot() {
-        soundPool?.play(casinoJackpotId, 1.0f, 1.0f, 4, 0, 1.0f)
-    }
-
     fun release() {
         soundPool?.release()
         soundPool = null
     }
 }
-
